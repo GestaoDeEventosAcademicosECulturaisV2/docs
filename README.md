@@ -16,7 +16,7 @@ Siga os passos abaixo para subir o banco de dados e popular o esquema automatica
 
 1.  **Clone o repositório** (se ainda não o fez):
     ```bash
-    git clone https://github.com/nettojulio/geac-so-para-bd.git
+    git clone git@github.com:GestaoDeEventosAcademicosECulturaisV2/docs.git
     ```
 
 2.  **Verifique o arquivo de inicialização**:
