@@ -53,6 +53,9 @@ O script SQL incluído neste repositório contém:
 Dessa forma, não é necessário rodar scripts manualmente; ao subir o container (`docker-compose up`), o ambiente já estará pronto e com dados.
 
 ---
+### Para acessar as views e o crud do projeto entre como administrador
+email: admin@geac.com
+senha: admin123
 
 ### 🛑 Como Parar o Projeto
 
