@@ -1,6 +1,6 @@
 services:
   geac-postgres:
-    container_name: geac-postgres
+    container_name: geac-postgres-bd
     image: postgres:18.1
     environment:
       POSTGRES_PASSWORD: postgres
@@ -8,7 +8,43 @@ services:
     ports:
       - "5432:5432"
     volumes:
-       - ./docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
+      - ./docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
+      - postgres-data:/var/lib/postgresql
+    networks:
+      - app-private-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 120s
+      retries: 5
+
+  geac-front:
+    container_name: geac-front
+    image: nettojulio/geac-front:latest
+    environment:
+      - API_URL_INTERNAL=http://geac-back:8080
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    networks:
+      - app-private-network
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  geac-back:
+    container_name: geac-back
+    image: nettojulio/geac-back:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://geac-postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      MAIL_HOST: smtp.gmail.com
+      MAIL_USERNAME: nettojulio@gmail.com
+      MAIL_PASSWORD: abcdefghijklmnop
+    depends_on:
+      geac-postgres:
+        condition: service_healthy
     networks:
       - app-private-network
 
