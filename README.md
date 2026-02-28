@@ -1,8 +1,18 @@
 # Plataforma de Gestão de Eventos Acadêmicos e Culturais (GEAC)
 
+# Integrantes do grupo
+Dimas Celestino da Silva Neto
+José Portela da Silva Neto
+Julio Antonio de Cerqueira Neto
+Pedro Tobias Souza Guerra
+
+# Porta que a aplicação está rodando
+Banco de dados: 5432,
+BackEnd: 8080,
+FrontEnd: 3000;
 ---
 
-Requisitos referentes a primeira entrega do projeto da disciplina de Banco de Dados.
+Requisitos referentes a segunda entrega do projeto da disciplina de Banco de Dados.
 
 ---
 
