@@ -1,9 +1,12 @@
 # Plataforma de Gestão de Eventos Acadêmicos e Culturais (GEAC)
 
 # Integrantes do grupo
-Dimas Celestino da Silva Neto
+Dimas Celestino da Silva Neto 
+<br>
 José Portela da Silva Neto
+<br>
 Julio Antonio de Cerqueira Neto
+<br>
 Pedro Tobias Souza Guerra
 
 # Porta que a aplicação está rodando
@@ -12,11 +15,39 @@ BackEnd: 8080,
 FrontEnd: 3000;
 ---
 
-Requisitos referentes a segunda entrega do projeto da disciplina de Banco de Dados.
+Requisitos referentes a terceira entrega do projeto da disciplina de Banco de Dados.
+
+
+Primeiramente, o dicionário dos dados está presente no arquivo .pdf dentro do repositório.
 
 ---
 
-Primeiramente, o dicionário dos dados está presente no arquivo .pdf dentro do repositório.
+### Mudanças Realizadas Para a Correção da Segunda Entrega
+
+1. Implementação total dos CRUD's solicitados de Organização e Usuários
+2. Lógica de implementação das views que estavam exigindo processamento do cliente (front-end) 
+
+---
+
+### 🔗 3 Views SQL
+
+| View | Finalidade |
+| :--- | :--- |
+| **vw_relatorio_horas_usuarios** | Resumo do total de horas complementares validadas por aluno |
+| **vw_estatisticas_eventos** | Estatísticas de capacidade, total de inscrições e presenças por evento |
+| **vw_engajamento_organizacoes** | Métrica de eventos realizados e público total engajado por organização |
+
+---
+
+
+### ⚡ Trigger de Banco de Dados: Notificações Automáticas (`trg_notify_org_request`)
+
+**Regra de Negócio Automatizada:** Garante que o sistema avise automaticamente o usuário sobre o resultado da sua solicitação para criar/entrar em uma organização. Sempre que um Administrador aprova ou rejeita um pedido na tabela `organizer_requests`, o próprio banco de dados (via Trigger `AFTER UPDATE`) insere um aviso na tabela `notifications`. Isso remove a responsabilidade do Backend (Java) de gerar esse alerta, garantindo integridade e reatividade.
+
+**Como testar a funcionalidade:**
+1. **Solicitação:** Logue como um *Usuário* comum e envie um pedido para uma Organização.
+2. **Aprovação:** Faça logout, entre como *Administrador* e aprove (ou rejeite) o pedido na tela de Aprovações.
+3. **Validação:** Volte para o *Usuário* comum e clique no ícone de notificações (Sininho). O aviso com o status da aprovação terá sido gerado instantaneamente pelo banco de dados.
 
 ---
 
@@ -63,9 +94,11 @@ O script SQL incluído neste repositório contém:
 Dessa forma, não é necessário rodar scripts manualmente; ao subir o container (`docker-compose up`), o ambiente já estará pronto e com dados.
 
 ---
-### Para acessar as views e o crud do projeto entre como administrador
+### Para acessar as views e os CRUD's do projeto entre como administrador
 email: admin@geac.com
+<br>
 senha: admin123
+---
 
 ### 🛑 Como Parar o Projeto
 
@@ -74,8 +107,6 @@ Para parar a execução e remover os containers:
 ```bash
 docker-compose down
 ```
-
----
 
 ## Diagrama Atualizado
 
